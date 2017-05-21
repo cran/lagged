@@ -1,0 +1,37 @@
+import(methods)
+
+S3method(as.vector, Lagged)
+S3method(as.double, Lagged)
+S3method(as.matrix, Lagged)
+S3method(as.array , Lagged)
+
+S3method(as.vector, Lagged1d)
+S3method(as.matrix, Lagged2d)
+S3method(as.array , Lagged3d)
+
+S3method(length, Lagged)
+
+exportClassPattern("^[^\\.]")
+
+##exportPattern("^[[:alpha:]]+")
+export(
+    ## S3 generics, no need to export but export if troublesome
+    ##
+    ## as.array.Lagged,
+    ## as.array.Lagged3d,
+    ##
+    ## as.double.Lagged,
+    ## as.matrix.Lagged,
+    ## as.matrix.Lagged2d,
+    ## as.vector.Lagged,
+    ## as.vector.Lagged1d,
+    ##
+    ## length.Lagged,
+
+    acf2Lagged,
+    ## whichLagged,
+    Lagged,
+    maxLag
+)
+
+
