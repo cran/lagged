@@ -285,9 +285,11 @@ setMethod("show", "Lagged1d",
               .reportClassName(object, "Lagged1d")
               cat("Slot *data*:", "\n")
 
-              x <- object@data
-              if(is.null(names(x)) || length(names(x)) == 0)
-                  names(x) <- paste0("Lag_", 0:(length(x) - 1))
+              ## 2017-05-24 was:
+              ##     x <- object@data
+              ##     if(is.null(names(x)) || length(names(x)) == 0)
+              ##         names(x) <- paste0("Lag_", 0:(length(x) - 1))
+              x <- dataWithLagNames(object)
               print(x)
               ## cat("\n")
           }
@@ -300,12 +302,13 @@ setMethod("show", "Lagged3d",
               .reportClassName(object, "Lagged3d")
               cat("Slot *data*:", "\n")
 
-              x <- object@data
-              if(is.null(dimnames(x)) || length(dimnames(x)) == 0){
-                  d <- dim(x)
-                  dimnames(x) <- list(rep("", d[1]), rep("", d[2]),
-                                      paste0("Lag_", 0:(d[3] - 1)) )
-              }
+              ## x <- object@data
+              ## if(is.null(dimnames(x)) || length(dimnames(x)) == 0){
+              ##     d <- dim(x)
+              ##     dimnames(x) <- list(rep("", d[1]), rep("", d[2]),
+              ##                         paste0("Lag_", 0:(d[3] - 1)) )
+              ## }
+              x <- dataWithLagNames(object)
               print(x)
               ## cat("\n")
           }
@@ -374,4 +377,20 @@ Lagged <- function(data, ...){
         acf2Lagged(data)
     }else
         stop("Cannot create a Lagged object from the given data")
+}
+
+dataWithLagNames <- function(object, prefix = "Lag_"){
+    x <- object[]
+    if(is.array(x)){
+        d <- dim(x)
+        nd <- length(d)
+
+        xwithnams <- provideDimnames(x, base = list(""), unique = FALSE)
+        dimnames(xwithnams)[[nd]] <- paste0(prefix, 0:(d[nd] - 1))
+        xwithnams
+    }else{
+        if(is.null(names(x)) || length(names(x)) == 0)
+            names(x) <- paste0(prefix, 0:(length(x) - 1))
+        x
+    }
 }

@@ -31,7 +31,8 @@ export(
     acf2Lagged,
     ## whichLagged,
     Lagged,
-    maxLag
+    maxLag,
+    dataWithLagNames # 0.1-1
 )
 
 

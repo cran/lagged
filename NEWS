@@ -1,4 +1,10 @@
+Changes in Version 0.1-1
+
+   - new function dataWithLagNames(), mainly for programming.
+
+
 Changes in Version 0.1-0
 
    - taken out of package 'sarima'.
+   - streamlined somewhat and published on CRAN.
 

@@ -1,7 +1,7 @@
-65916165977bc9308ad74e01756e37d6 *DESCRIPTION
-680e82c26a1431ed3dc32384deffe916 *NAMESPACE
-bf631d93194e27fbd244951f4207b0db *NEWS
-3a01c2d32d3dba9095db652eaae0a13c *R/lagged.R
+f1c67db3dc1ff9f5a0932454f14639be *DESCRIPTION
+ee46ff6a8a9ef37607ee1293e6a16199 *NAMESPACE
+2542d8916d4bfddd452bc5e40db46c57 *NEWS
+95ea737ea356adadff8a637c82612097 *R/lagged.R
 32faa98e82c20f56351a28b5bb604b20 *R/utils.R
 5510118639d5b84cfcda472afe5c9c1a *TODO
 b4e3fe2df707ff405f29e4f5a414d2d5 *man/FlexibleLagged-class.Rd
@@ -13,4 +13,5 @@ d92d26e7bf800592f1766cd51bbb4d9e *man/Lagged-class.Rd
 30107a512c63fd800ae8fec16e65de5e *man/acf2Lagged.Rd
 3a8916cfc7b7114c28547332d15d9303 *man/bracket-methods.Rd
 1a963c07864f5500ef6bd385a9f14b2b *man/bracketass-methods.Rd
+62c791db1a0148a2a60cc9b68cc1cf44 *man/dataWithLagNames.Rd
 aff4f3375a6b3a2dd53c3423955bd133 *man/maxLag.Rd
