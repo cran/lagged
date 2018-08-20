@@ -1,0 +1,192 @@
+% Created 2018-08-08 Wed 17:11
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,twoside,11pt,nojss,article]{jss}
+	       \usepackage[T1]{fontenc}
+	       \usepackage[left=2cm,right=2cm,bottom=15mm]{geometry}
+	       \usepackage{graphicx,color,alltt}
+	       \usepackage[authoryear,round,longnamesfirst]{natbib}
+	       \usepackage{hyperref}
+                              % \usepackage{Sweave}
+\author{Georgi N. Boshnakov}
+\Plainauthor{Georgi N. Boshnakov}
+\Address{
+Georgi N. Boshnakov\\
+School of Mathematics\\
+The University of Manchester\\
+Oxford Road, Manchester M13 9PL, UK\\
+URL: \url{http://www.maths.manchester.ac.uk/~gb/}
+}
+<<echo=FALSE>>=
+library("lagged")
+pd <- packageDescription("lagged")
+@
+\Abstract{
+Package \pkg{lagged} provides classes and methods for objects,
+whose indexing naturally starts from zero.
+\par
+This vignette is part of package \pkg{lagged}, version~\Sexpr{pd$Version}.
+}
+\Keywords{lag, autocorrelation, indexing}
+\Plainkeywords{lag, autocorrelation, indexing}
+\author{Georgi N. Boshnakov}
+\date{\today}
+\title{Inserting figures and evaluated examples}
+\hypersetup{
+ pdfauthor={Georgi N. Boshnakov},
+ pdftitle={Inserting figures and evaluated examples},
+ pdfkeywords={examples, graphics, figures, Rd, R},
+ pdfsubject={},
+ pdfcreator={Emacs 25.3.1 (Org mode 9.1.6)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+%\SweaveOpts{engine=R,eps=FALSE}
+
+%\VignetteIndexEntry{Inserting figures and evaluated examples}
+%\VignetteDepends{lagged}
+%\VignetteKeywords{examples, graphics, figures, Rd, R}
+%\VignettePackage{lagged}
+
+
+\section{Univariate lagged objects}
+\label{sec:org2fecd57}
+
+Create a univariate lagged object\footnote{The datasets \texttt{ldeaths}, \texttt{fdeaths} and \texttt{mdeaths} are in base R. The examples
+involving them are adapted from the help page of \texttt{acf()}.}:
+<<>>=
+a1 <-  drop(acf(ldeaths)$acf)
+la1 <- Lagged(a1)
+la1
+@ %def
+
+
+\texttt{maxLag()} returns the maximal lag in the object. \texttt{Length()} returns the number of lags in the
+object, i.e. \texttt{length(la1) == maxLag(la1) + 1}. This relation is a definition and holds also
+for multivariate lagged objects. In particular, the length is not necessarily the
+length of the data slot.
+<<>>=
+maxLag(la1)
+length(la1)
+@ %def
+
+
+\section{Indexing}
+\label{sec:org634f5f6}
+
+Indexing drops the "laggedness" to allow easy access to the underlying data\footnote{For some indices, such as \texttt{0:4}, it is possible to keep a Lagged class but it would be
+confusing if the indexing operation was returning Lagged or non-Lagged objects depending on
+the values of the index.}:
+<<>>=
+la1[0]
+la1[0:4]
+la1[c(1,3,5)]
+la1[]
+@ %def
+
+
+<<>>=
+la1a <- la1
+la1a[] <- round(la1, 2)
+la1a
+@ %def
+
+<<>>=
+la1b <- round(la1, 2)
+all(la1a == la1b)
+@ %def
+
+
+
+
+\section{Unary arithmetic and mathematical functions}
+\label{sec:orgd6be8cc}
+
+Unary arithmetic operations and mathematical functions replace the data part of the object
+and keep its class.
+<<>>=
+-la1a
++la1a
+
+## Math group
+abs(la1a)
+sinpi(la1a)
+sqrt(abs(la1a))
+
+## Math2 group
+round(la1a)
+round(la1a, 2)
+signif(la1a)
+signif(la1a, 4)
+@ %def
+
+The functions from the summary group work on the data part, as if they were called on it.
+<<>>=
+c(Max = max(la1a), Min = min(la1a), Range = range(la1a))
+c(Prod = prod(la1a), Sum = sum(la1a))
+c(Any = any(la1a < 0), All = all(la1a >= 0))
+@ %def
+
+Binary arithmetic operators are defined between two lagged objects and between a lagged
+object and a vector. They return a lagged object from one of the "basic" lagged classes, but
+not necessarilly exactly from the class of the argument(s). The class of the returned value
+is from a suitable lagged superclass of the argument(s). This concerns operations on objects
+from classes inheriting from the classes considered here, so is not visible in the examples
+below, since they use objects from the basic lagged classes.
+<<>>=
+2*la1a
+la1a^2
+la1a + la1a^2
+la1a - la1a^2
+la1a * la1a^2
+la1a / la1a^2
+
+la1a + 1:length(la1a)
+@ %def
+
+There is a case to argue for keeping the class in some situations, e.g. when the other
+argument is a scalar but eventually I decided to keep the simple rule of not trying to
+preserve the class. 
+
+Note however that unary operators and mathematical functions do preserve the class.
+
+\section{Multivariate lagged objects}
+\label{sec:org4e80c18}
+
+Compute the autocorrelations of a multivariate time series and convert it to a lagged object.
+<<>>=
+acv2 <- acf(ts.union(mdeaths, fdeaths))
+la2 <- Lagged(acv2)
+@ %def
+
+Get the value for lag 1.
+<<>>=
+la2[1]
+acv2$acf[2, ,] # same
+@ %def
+
+Indexing in \texttt{acf()} is somewhat misterious. For some insight, here is a comparison with a DIY
+calculation of the autocorrelations.
+<<>>=
+n <- length(mdeaths)
+tmpcov <- sum((mdeaths - mean(mdeaths)) * (fdeaths - mean(fdeaths)) ) / n
+msd <- sqrt(sum((mdeaths - mean(mdeaths))^2)/n)
+fsd <- sqrt(sum((fdeaths - mean(fdeaths))^2)/n)
+tmpcov1 <- sum((mdeaths - mean(mdeaths))[2:n] * (fdeaths - mean(fdeaths))[1:(n-1)] ) / n
+tmpcov1 / (msd * fsd)
+la2[[1]][1,2] == tmpcov1 / (msd * fsd) # FALSE, but:
+la2[[1]][1,2] - tmpcov1 / (msd * fsd)  # only numerically different
+@ %def
+
+Some examples for the correspondence between the indices in lagged objects and those from
+\texttt{acf()}.
+<<>>=
+la2[[1]][1,2] == acv2$acf[2, 1, 2] # TRUE
+
+la2[0]
+acv2[0]
+
+la2[1]
+acv2[1]
+@ %def
+\end{document}

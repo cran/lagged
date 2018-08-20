@@ -6,6 +6,8 @@
 \alias{maxLag,array-method}
 \alias{maxLag,matrix-method}
 \alias{maxLag,vector-method}
+\alias{maxLag,ANY-method}
+\alias{maxLag,slMatrix-method}
 \title{
   Give the maximal lag in an object
 }
@@ -46,9 +48,17 @@ maxLag(object, \dots)
 }\item{\code{signature(object = "vector")}}{{
 %%  ~~describe this method here~~
 }
+}\item{\code{signature(object = "ANY")}}{{
+%%  ~~describe this method here~~
+}
+}\item{\code{signature(object = "slMatrix")}}{{
+%%  ~~describe this method here~~
+}
 }}}
 %\note{}
-%\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\seealso{
+  \code{\link{maxLag<-}}
+}
 %\examples{
 %}
 \keyword{methods}

@@ -41,6 +41,12 @@ Class \code{"\linkS4class{Lagged}"}, directly.
 \code{\linkS4class{Lagged3d}}
 }
 \examples{
-showClass("Lagged1d")
+v <- cos(2*pi*(0:10)/10)
+new("Lagged1d", data = v) ## ok, but Lagged() is more convenient
+x <- Lagged(v)
+class(x) # Lagged1d
+x
+x[0]
+x[0:3]
 }
 \keyword{classes}

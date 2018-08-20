@@ -1,0 +1,188 @@
+#+PROPERTY: header-args:R  :cache yes :session ravel01-r :results value :exports both
+#+OPTIONS: toc:nil
+#+LaTeX_CLASS: Rvignette
+#+LaTeX_CLASS_OPTIONS: [a4paper,twoside,11pt,nojss,article]
+#+TITLE: Inserting figures and evaluated examples
+#+AUTHOR: Georgi N. Boshnakov
+#+MACRO: keywords examples, graphics, figures, Rd, R
+#+MACRO: Rpackage lagged
+#+KEYWORDS: examples, graphics, figures, Rd, R
+#+LATEX_HEADER: % \usepackage{Sweave}
+#+LATEX_HEADER: \author{Georgi N. Boshnakov}
+#+LATEX_HEADER: \Plainauthor{Georgi N. Boshnakov}
+#+LATEX_HEADER: \Address{
+#+LATEX_HEADER:   Georgi N. Boshnakov\\
+#+LATEX_HEADER:   School of Mathematics\\
+#+LATEX_HEADER:   The University of Manchester\\
+#+LATEX_HEADER:   Oxford Road, Manchester M13 9PL, UK\\
+#+LATEX_HEADER:   URL: \url{http://www.maths.manchester.ac.uk/~gb/}
+#+LATEX_HEADER: }
+#+LATEX_HEADER: <<echo=FALSE>>=
+#+LATEX_HEADER: library("lagged")
+#+LATEX_HEADER: pd <- packageDescription("lagged")
+#+LATEX_HEADER: @
+#+LATEX_HEADER: \Abstract{
+#+LATEX_HEADER: Package \pkg{lagged} provides classes and methods for objects,
+#+LATEX_HEADER: whose indexing naturally starts from zero. 
+#+LATEX_HEADER: \par
+#+LATEX_HEADER: This vignette is part of package \pkg{lagged}, version~\Sexpr{pd$Version}.
+#+LATEX_HEADER: }
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \Keywords{lag, autocorrelation, indexing}
+#+LATEX_HEADER: \Plainkeywords{lag, autocorrelation, indexing}
+
+@@latex:%@@\SweaveOpts{engine=R,eps=FALSE}
+
+@@latex:%@@\VignetteIndexEntry{{{{title}}}}
+@@latex:%@@\VignetteDepends{{{{Rpackage}}}}
+@@latex:%@@\VignetteKeywords{{{{keywords}}}}
+@@latex:%@@\VignettePackage{{{{Rpackage}}}}
+
+
+#+BEGIN_SRC R :results value silent :exports none
+library("lagged")
+pd <- packageDescription("lagged")
+#+END_SRC
+
+
+* Univariate lagged objects
+
+Create a univariate lagged object[fn:helpacf]:
+#+BEGIN_SRC R
+a1 <-  drop(acf(ldeaths)$acf)
+la1 <- Lagged(a1)
+la1
+#+END_SRC
+
+
+[fn:helpacf] The datasets =ldeaths=, =fdeaths= and =mdeaths= are in base R. The examples
+involving them are adapted from the help page of ~acf()~.
+
+
+~maxLag()~ returns the maximal lag in the object. ~Length()~ returns the number of lags in the
+object, i.e. ~length(la1) == maxLag(la1) + 1~. This relation is a definition and holds also
+for multivariate lagged objects. In particular, the length is not necessarily the
+length of the data slot.
+#+BEGIN_SRC R
+maxLag(la1)
+length(la1)
+#+END_SRC
+
+
+* Indexing
+
+Indexing drops the "laggedness" to allow easy access to the underlying data[fn:1]:
+#+BEGIN_SRC R
+la1[0]
+la1[0:4]
+la1[c(1,3,5)]
+la1[]
+#+END_SRC
+
+
+[fn:1] For some indices, such as =0:4=, it is possible to keep a Lagged class but it would be
+confusing if the indexing operation was returning Lagged or non-Lagged objects depending on
+the values of the index.
+
+
+#+BEGIN_SRC R
+la1a <- la1
+la1a[] <- round(la1, 2)
+la1a
+#+END_SRC
+
+#+BEGIN_SRC R
+la1b <- round(la1, 2)
+all(la1a == la1b)
+#+END_SRC
+
+
+
+
+* Unary arithmetic and mathematical functions
+
+Unary arithmetic operations and mathematical functions replace the data part of the object
+and keep its class.
+#+BEGIN_SRC R
+-la1a
++la1a
+
+## Math group
+abs(la1a)
+sinpi(la1a)
+sqrt(abs(la1a))
+
+## Math2 group
+round(la1a)
+round(la1a, 2)
+signif(la1a)
+signif(la1a, 4)
+#+END_SRC
+
+The functions from the summary group work on the data part, as if they were called on it.
+#+BEGIN_SRC R
+c(Max = max(la1a), Min = min(la1a), Range = range(la1a))
+c(Prod = prod(la1a), Sum = sum(la1a))
+c(Any = any(la1a < 0), All = all(la1a >= 0))
+#+END_SRC
+
+Binary arithmetic operators are defined between two lagged objects and between a lagged
+object and a vector. They return a lagged object from one of the "basic" lagged classes, but
+not necessarilly exactly from the class of the argument(s). The class of the returned value
+is from a suitable lagged superclass of the argument(s). This concerns operations on objects
+from classes inheriting from the classes considered here, so is not visible in the examples
+below, since they use objects from the basic lagged classes.
+#+BEGIN_SRC R
+2*la1a
+la1a^2
+la1a + la1a^2
+la1a - la1a^2
+la1a * la1a^2
+la1a / la1a^2
+
+la1a + 1:length(la1a)
+#+END_SRC
+There is a case to argue for keeping the class in some situations, e.g. when the other
+argument is a scalar but eventually I decided to keep the simple rule of not trying to
+preserve the class. 
+
+Note however that unary operators and mathematical functions do preserve the class.
+
+* Multivariate lagged objects
+
+Compute the autocorrelations of a multivariate time series and convert it to a lagged object.
+#+BEGIN_SRC R
+acv2 <- acf(ts.union(mdeaths, fdeaths))
+la2 <- Lagged(acv2)
+#+END_SRC
+
+Get the value for lag 1.
+#+BEGIN_SRC R
+la2[1]
+acv2$acf[2, ,] # same
+#+END_SRC
+
+Indexing in ~acf()~ is somewhat misterious. For some insight, here is a comparison with a DIY
+calculation of the autocorrelations.
+#+BEGIN_SRC R
+n <- length(mdeaths)
+tmpcov <- sum((mdeaths - mean(mdeaths)) * (fdeaths - mean(fdeaths)) ) / n
+msd <- sqrt(sum((mdeaths - mean(mdeaths))^2)/n)
+fsd <- sqrt(sum((fdeaths - mean(fdeaths))^2)/n)
+tmpcov1 <- sum((mdeaths - mean(mdeaths))[2:n] * (fdeaths - mean(fdeaths))[1:(n-1)] ) / n
+tmpcov1 / (msd * fsd)
+la2[[1]][1,2] == tmpcov1 / (msd * fsd) # FALSE, but:
+la2[[1]][1,2] - tmpcov1 / (msd * fsd)  # only numerically different
+#+END_SRC
+
+Some examples for the correspondence between the indices in lagged objects and those from
+~acf()~.
+#+BEGIN_SRC R
+la2[[1]][1,2] == acv2$acf[2, 1, 2] # TRUE
+
+la2[0]
+acv2[0]
+
+la2[1]
+acv2[1]
+#+END_SRC

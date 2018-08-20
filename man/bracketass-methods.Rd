@@ -7,6 +7,7 @@
 \alias{[<-,Lagged,missing-method}
 \alias{[<-,Lagged2d,numeric-method}
 \alias{[<-,Lagged3d,numeric-method}
+\alias{[<-,slMatrix,ANY-method}
 \title{Methods for subset assignment}
 \description{Methods for subset assignment.}
 \section{Methods}{
@@ -31,6 +32,9 @@
 %%  ~~describe this method here~~
 }
 }\item{\code{signature(x = "Lagged3d", i = "numeric")}}{{
+%%  ~~describe this method here~~
+}
+}\item{\code{signature(x = "slMatrix", i = "ANY")}}{{
 %%  ~~describe this method here~~
 }
 }}}

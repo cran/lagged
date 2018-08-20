@@ -20,6 +20,9 @@ dataWithLagNames(object, prefix = "Lag_")
   \code{dataWithLagNames()} extracts the data part from a lagged object and
   gives names to the lag dimension, if it is not already named.
 
+  This function is mainly used for programming, particularly in
+  \code{show()} methods for lagged objects..
+
 }
 \value{
   The data part with names as described in Details.
@@ -37,9 +40,21 @@ dataWithLagNames(object, prefix = "Lag_")
 %\seealso{
 %%% ~~objects to See Also as \code{\link{help}}, ~~~
 %}
-%\examples{
-%}
+\examples{
+x <- Lagged(drop(acf(ldeaths, plot = FALSE)$acf))
+## there are no names for the lags:
+names(x) # NULL
+## but the print method inserts default "Lag_N" names
+x
+## This sets the names to their defaults:
+x1 <- dataWithLagNames(x)
+names(x1)
+## ... and this sets non-default prefix:
+x2 <- dataWithLagNames(x, "L")
+names(x2)
+x2
+}
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~kwd1 }
+%\keyword{}
 % use one of  RShowDoc("KEYWORDS")

@@ -11,6 +11,12 @@ S3method(as.array , Lagged3d)
 
 S3method(length, Lagged)
 
+S3method(as.matrix, slMatrix)
+
+exportMethods(
+    "[",        # are these necessary for primitive functions?
+    "[<-"       # the methods (at least for "[<-") seem to work without this
+)
 exportClassPattern("^[^\\.]")
 
 ##exportPattern("^[[:alpha:]]+")
@@ -28,11 +34,17 @@ export(
     ##
     ## length.Lagged,
 
-    acf2Lagged,
-    ## whichLagged,
-    Lagged,
-    maxLag,
-    dataWithLagNames # 0.1-1
+    acf2Lagged
+    ## , whichLagged
+    , Lagged
+    , maxLag
+    , "maxLag<-"
+    , dataWithLagNames # 0.1-1
+    , slMatrix
+
+    ## , fill.slMatrix
+    ## , as.matrix.slMatrix    #     todo: document somehow?
+
 )
 
 

@@ -1,12 +1,10 @@
 \name{acf2Lagged}
 \alias{acf2Lagged}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{Convert "acf" objects to "Lagged" objects}
 \description{Convert "acf" objects to "Lagged" objects.}
 \usage{
 acf2Lagged(x)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
     an object from "S3" class "acf", typically obtained from
@@ -18,10 +16,9 @@ acf2Lagged(x)
   \code{acf2Lagged()} converts objects produced by \code{acf()} and
   friends to suitable "Lagged" objects.
 
-  If \code{x} represents partial autocorrelations, there is no value for
-  lag zero. In the univariate case \code{acf2Lagged()} prepends the
-  number 1. In the multivariate case, a matrix of NA's is put
-  at lag zero.
+  Partial autocorrelations obtained from \code{acf()} do not contain
+  value for lag zero. \code{acf2Lagged()} puts the number 1 at lag zero
+  in the univariate case and a matrix of NA's in the multivariate case.
 
 }
 \value{
@@ -46,7 +43,7 @@ acf2Lagged(x)
 lh_acf <- acf2Lagged(acf(lh))
 
 lh_acf[0:5]
-acf(lh)$acf[1 + 0:5] # same
+acf(lh, plot = FALSE)$acf[1 + 0:5] # same
 
 acf(ts.union(mdeaths, fdeaths))$acf[15,,]
 

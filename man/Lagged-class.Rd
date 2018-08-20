@@ -6,14 +6,12 @@
 %\alias{[,Lagged,numeric-method}
 %\alias{[<-,Lagged,numeric-method}
 %\alias{maxLag,Lagged-method}
-\alias{[[,Lagged,numeric-method}
-\alias{[[<-,Lagged,numeric-method}
+%\alias{[[,Lagged,numeric-method}
+%\alias{[[<-,Lagged,numeric-method}
 
 \title{Class Lagged}
 \description{Class Lagged.}
 \section{Objects from the Class}{
-Objects can be created by calls of the form \code{new("Lagged", ...)}.
-%%  ~~ describe objects here ~~
 
 This class serves as a base class for objects with natural
 indexing starting from zero. It is a virtual class, no objects can be
@@ -89,10 +87,14 @@ singleton.
 %
 %%% ~Make other sections like Warning with \section{Warning }{....} ~
 %
-%\seealso{
-%%%  ~~objects to See Also as \code{\link{~~fun~~}}, ~~~
-%%%  ~~or \code{\linkS4class{CLASSNAME}} for links to other classes ~~~
-%}
+\seealso{
+  function \code{\link{Lagged}} which creates objects from suitable
+    subclasses of \code{"Lagged"},
+    and also
+    \code{\linkS4class{Lagged1d}},
+    \code{\linkS4class{Lagged2d}},
+    \code{\linkS4class{Lagged3d}}
+}
 %\examples{
 %showClass("Lagged")
 %}

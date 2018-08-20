@@ -108,6 +108,15 @@ setReplaceMethod("[[", c(x = "Lagged", i = "numeric"),
                      x
                  })
 
+setMethod("Ops", c(e1 = "Lagged", e2 = "missing"),
+          function(e1){
+                    # wrk <- callGeneric(e1@data)
+                    # clname <- whichLagged(e1)
+                    # new(clname, data = wrk)
+              e1@data <- callGeneric(e1@data)
+              e1
+          })
+
 ## TODO: do not allow mixing Lagged1d with Lagged2d, etc.?
 setMethod("Ops", c(e1 = "Lagged", e2 = "Lagged"),
           function(e1, e2){
@@ -175,6 +184,23 @@ setMethod("Ops", c(e1 = "vector", e2 = "FlexibleLagged"),
               callGeneric(e1, e2@data)
           })
 
+setMethod("Math", c(x = "Lagged"),
+          function(x){
+              x@data <- callGeneric(x@data)
+              x
+          })
+
+setMethod("Math2", c(x = "Lagged"),
+          function(x, digits){
+              x@data <- callGeneric(x@data, digits)
+              x
+          })
+
+setMethod("Summary", c(x = "Lagged"),
+          function(x, ..., na.rm = FALSE){
+              callGeneric(x@data)
+          })
+
 ## TODO: check if the S3 methods understand S4 inheritance (I think they do)
 as.vector.Lagged <- function(x, mode) as.vector(x@data) # todo: use mode?
 as.double.Lagged <- function(x, ...)  as.double(x@data ) # note: this is for as.numeric()
@@ -197,6 +223,15 @@ maxLag <- function(object, ...){
 }
 
 setGeneric("maxLag")
+
+setGeneric("maxLag<-", def = function(object, ..., value){ standardGeneric("maxLag<-") } )
+
+setReplaceMethod("maxLag", "Lagged",
+                 function(object, ..., value){
+                     object@data <- object[0:value]
+                     object
+                 }
+                 )
 
 setMethod("maxLag", c(object = "vector"), function(object) length(object) - 1)
 setMethod("maxLag", c(object = "matrix"), function(object) ncol(object) - 1 )
@@ -244,6 +279,12 @@ setMethod("whichLagged", c(x = "ANY"     , y = "missing"), function(x) "Flexible
 setMethod("whichLagged", c(x = "Lagged1d", y = "missing"), function(x) "Lagged1d")
 setMethod("whichLagged", c(x = "Lagged2d", y = "missing"), function(x) "Lagged2d")
 setMethod("whichLagged", c(x = "Lagged3d", y = "missing"), function(x) "Lagged3d")
+
+setReplaceMethod("[", c(x = "Lagged", i = "missing"),
+          function(x, i, value){
+              x[0:maxLag(x)] <- value
+              x
+          })
 
 setReplaceMethod("[", c(x = "Lagged1d", i = "numeric"),
           function(x, i, value){
