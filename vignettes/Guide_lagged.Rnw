@@ -1,4 +1,4 @@
-% Created 2018-08-08 Wed 17:11
+% Created 2018-10-05 Fri 23:26
 % Intended LaTeX compiler: pdflatex
 \documentclass[a4paper,twoside,11pt,nojss,article]{jss}
 	       \usepackage[T1]{fontenc}
@@ -30,11 +30,11 @@ This vignette is part of package \pkg{lagged}, version~\Sexpr{pd$Version}.
 \Plainkeywords{lag, autocorrelation, indexing}
 \author{Georgi N. Boshnakov}
 \date{\today}
-\title{Inserting figures and evaluated examples}
+\title{Draft guide to package "lagged"}
 \hypersetup{
  pdfauthor={Georgi N. Boshnakov},
- pdftitle={Inserting figures and evaluated examples},
- pdfkeywords={examples, graphics, figures, Rd, R},
+ pdftitle={Draft guide to package "lagged"},
+ pdfkeywords={time series, lag, autocorrelations, indexing},
  pdfsubject={},
  pdfcreator={Emacs 25.3.1 (Org mode 9.1.6)}, 
  pdflang={English}}
@@ -43,14 +43,14 @@ This vignette is part of package \pkg{lagged}, version~\Sexpr{pd$Version}.
 \maketitle
 %\SweaveOpts{engine=R,eps=FALSE}
 
-%\VignetteIndexEntry{Inserting figures and evaluated examples}
+%\VignetteIndexEntry{Draft guide to package "lagged"}
 %\VignetteDepends{lagged}
 %\VignetteKeywords{examples, graphics, figures, Rd, R}
 %\VignettePackage{lagged}
 
 
 \section{Univariate lagged objects}
-\label{sec:org2fecd57}
+\label{sec:org3518898}
 
 Create a univariate lagged object\footnote{The datasets \texttt{ldeaths}, \texttt{fdeaths} and \texttt{mdeaths} are in base R. The examples
 involving them are adapted from the help page of \texttt{acf()}.}:
@@ -72,7 +72,7 @@ length(la1)
 
 
 \section{Indexing}
-\label{sec:org634f5f6}
+\label{sec:org568a95d}
 
 Indexing drops the "laggedness" to allow easy access to the underlying data\footnote{For some indices, such as \texttt{0:4}, it is possible to keep a Lagged class but it would be
 confusing if the indexing operation was returning Lagged or non-Lagged objects depending on
@@ -100,7 +100,7 @@ all(la1a == la1b)
 
 
 \section{Unary arithmetic and mathematical functions}
-\label{sec:orgd6be8cc}
+\label{sec:org9e5faa0}
 
 Unary arithmetic operations and mathematical functions replace the data part of the object
 and keep its class.
@@ -151,7 +151,7 @@ preserve the class.
 Note however that unary operators and mathematical functions do preserve the class.
 
 \section{Multivariate lagged objects}
-\label{sec:org4e80c18}
+\label{sec:orgbe9bdc2}
 
 Compute the autocorrelations of a multivariate time series and convert it to a lagged object.
 <<>>=

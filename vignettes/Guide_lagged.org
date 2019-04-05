@@ -2,11 +2,11 @@
 #+OPTIONS: toc:nil
 #+LaTeX_CLASS: Rvignette
 #+LaTeX_CLASS_OPTIONS: [a4paper,twoside,11pt,nojss,article]
-#+TITLE: Inserting figures and evaluated examples
+#+TITLE: Draft guide to package "lagged"
 #+AUTHOR: Georgi N. Boshnakov
 #+MACRO: keywords examples, graphics, figures, Rd, R
 #+MACRO: Rpackage lagged
-#+KEYWORDS: examples, graphics, figures, Rd, R
+#+KEYWORDS: time series, lag, autocorrelations, indexing
 #+LATEX_HEADER: % \usepackage{Sweave}
 #+LATEX_HEADER: \author{Georgi N. Boshnakov}
 #+LATEX_HEADER: \Plainauthor{Georgi N. Boshnakov}

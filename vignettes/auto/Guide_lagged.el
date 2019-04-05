@@ -25,13 +25,9 @@
     "natbib"
     "hyperref")
    (LaTeX-add-labels
-    "sec:org2fecd57"
-    "sec:org634f5f6"
-    "sec:orgd6be8cc"
-    "sec:org4e80c18")
-   (LaTeX-add-environments
-    '("eptblFigure" LaTeX-env-args ["argument"] 0)
-    '("epfigFigure" LaTeX-env-args ["argument"] 0)
-    '("epFigure" LaTeX-env-args ["argument"] 0)))
+    "sec:org3518898"
+    "sec:org568a95d"
+    "sec:org9e5faa0"
+    "sec:orgbe9bdc2"))
  :latex)
 

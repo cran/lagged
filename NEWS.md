@@ -1,4 +1,17 @@
-# lagged 0.2-0
+# lagged 0.2-1
+
+* Bug-fix:  `nSeasons()` and `nSeasons<-()`are now exported.
+
+* new functions `sl2acfbase()`, `acfbase2sl()` and `sl2vecacf()` for converting
+  between (multivariate) autocovariances returned by `stats::acf()` and
+  season-lag representation. (These functions were formerly in package pcts.)
+
+* The title of the vignette and the keywords were wrong.
+
+* added the pkgdown site to DESCRIPTION.
+
+
+# lagged 0.2-0 (CRAN)
 
 * New generics `nSeasons()` and `nSeasons<-()` (moved here from package sarima).
 

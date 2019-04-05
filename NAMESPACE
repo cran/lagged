@@ -45,6 +45,13 @@ export(
     ## , fill.slMatrix
     ## , as.matrix.slMatrix    #     todo: document somehow?
 
+    , nSeasons
+    , "nSeasons<-"
+
+  , sl2acfbase
+  , acfbase2sl
+  , sl2vecacf
+
+
+
 )
-
-

@@ -4,7 +4,7 @@
 %\alias{[,slMatrix,ANY,ANY,ANY-method}
 %\alias{[<-,slMatrix-method}
 %\alias{maxLag,slMatrix-method}
-% \alias{pc.nseasons,slMatrix-method}
+\alias{nSeasons,slMatrix-method}
 
 \title{Class "slMatrix" }
 \description{ \code{slMatrix} is a matrix-like object for storing values

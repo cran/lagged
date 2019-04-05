@@ -51,8 +51,12 @@ deaths_mts <- ts.union(mdeaths, fdeaths)
 deaths_acf <- acf2Lagged(acf(deaths_mts))
 base_acf <- acf(deaths_mts)
 
+## rho_14
 deaths_acf[14]
 base_acf$acf[1 + 14, , ] # same
+## this is different and maybe surprising to some:
+base_acf[14]
+## (see also examples in \link{Lagged})
 }
 \keyword{ts}
 % use one of  RShowDoc("KEYWORDS")
