@@ -57,9 +57,32 @@ maxLag(object, \dots)
 }}}
 %\note{}
 \seealso{
-  \code{\link{maxLag<-}}
+  \code{"\link{maxLag<-}"}
 }
-%\examples{
-%}
+\examples{
+## 1d
+v <- Lagged(2^(0:6))
+v
+maxLag(v)
+v[c(2,4,6)]
+v[8] # NA
+## reduce the number of lags in place
+maxLag(v) <- 4
+v
+## extend the object (with NA's)
+maxLag(v) <- 6
+v
+## extend using "["
+v[5:8] <- 2^(5:8)
+v
+
+## 2d
+m <- Lagged(matrix(1:12, nrow = 4))
+m
+maxLag(m)
+maxLag(m) <- 1
+m
+## maxLag(m) <- 4 # extending this way doesn't work currently
+}
 \keyword{methods}
 \keyword{ts}

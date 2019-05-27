@@ -8,7 +8,7 @@ pd <- packageDescription("lagged")
 
 
 ###################################################
-### code chunk number 2: Guide_lagged.Rnw:57-60
+### code chunk number 2: Guide_lagged.Rnw:60-63
 ###################################################
 a1 <-  drop(acf(ldeaths)$acf)
 la1 <- Lagged(a1)
@@ -16,14 +16,14 @@ la1
 
 
 ###################################################
-### code chunk number 3: Guide_lagged.Rnw:68-70
+### code chunk number 3: Guide_lagged.Rnw:71-73
 ###################################################
 maxLag(la1)
 length(la1)
 
 
 ###################################################
-### code chunk number 4: Guide_lagged.Rnw:80-84
+### code chunk number 4: Guide_lagged.Rnw:83-87
 ###################################################
 la1[0]
 la1[0:4]
@@ -32,7 +32,7 @@ la1[]
 
 
 ###################################################
-### code chunk number 5: Guide_lagged.Rnw:88-91
+### code chunk number 5: Guide_lagged.Rnw:91-94
 ###################################################
 la1a <- la1
 la1a[] <- round(la1, 2)
@@ -40,14 +40,14 @@ la1a
 
 
 ###################################################
-### code chunk number 6: Guide_lagged.Rnw:94-96
+### code chunk number 6: Guide_lagged.Rnw:97-99
 ###################################################
 la1b <- round(la1, 2)
 all(la1a == la1b)
 
 
 ###################################################
-### code chunk number 7: Guide_lagged.Rnw:107-120
+### code chunk number 7: Guide_lagged.Rnw:110-123
 ###################################################
 -la1a
 +la1a
@@ -65,7 +65,7 @@ signif(la1a, 4)
 
 
 ###################################################
-### code chunk number 8: Guide_lagged.Rnw:124-127
+### code chunk number 8: Guide_lagged.Rnw:127-130
 ###################################################
 c(Max = max(la1a), Min = min(la1a), Range = range(la1a))
 c(Prod = prod(la1a), Sum = sum(la1a))
@@ -73,7 +73,7 @@ c(Any = any(la1a < 0), All = all(la1a >= 0))
 
 
 ###################################################
-### code chunk number 9: Guide_lagged.Rnw:136-144
+### code chunk number 9: Guide_lagged.Rnw:139-147
 ###################################################
 2*la1a
 la1a^2
@@ -86,21 +86,21 @@ la1a + 1:length(la1a)
 
 
 ###################################################
-### code chunk number 10: Guide_lagged.Rnw:157-159
+### code chunk number 10: Guide_lagged.Rnw:160-162
 ###################################################
 acv2 <- acf(ts.union(mdeaths, fdeaths))
 la2 <- Lagged(acv2)
 
 
 ###################################################
-### code chunk number 11: Guide_lagged.Rnw:163-165
+### code chunk number 11: Guide_lagged.Rnw:166-168
 ###################################################
 la2[1]
 acv2$acf[2, ,] # same
 
 
 ###################################################
-### code chunk number 12: Guide_lagged.Rnw:170-178
+### code chunk number 12: Guide_lagged.Rnw:173-181
 ###################################################
 n <- length(mdeaths)
 tmpcov <- sum((mdeaths - mean(mdeaths)) * (fdeaths - mean(fdeaths)) ) / n
@@ -113,7 +113,7 @@ la2[[1]][1,2] - tmpcov1 / (msd * fsd)  # only numerically different
 
 
 ###################################################
-### code chunk number 13: Guide_lagged.Rnw:183-190
+### code chunk number 13: Guide_lagged.Rnw:186-193
 ###################################################
 la2[[1]][1,2] == acv2$acf[2, 1, 2] # TRUE
 

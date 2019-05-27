@@ -2,6 +2,7 @@
 \alias{maxLag<--methods}
 \alias{maxLag<-}
 \alias{maxLag<-,Lagged-method}
+\alias{maxLag<-,FlexibleLagged-method}
 \docType{methods}
 \title{Change the maximal lag in a lagged object}
 \description{Change the maximal lag in a lagged object.}
@@ -12,7 +13,7 @@ maxLag(object, ...) <- value
   \item{object}{an object for which this makes sense.}
   \item{\dots}{currently not used.}
   \item{value}{
-    the new value of the maximal lag, a nohn-negative integer number.
+    the new value of the maximal lag, a non-negative integer number.
   } 
 }
 \details{
@@ -38,7 +39,10 @@ maxLag(object, ...) <- value
 \item{\code{signature(object = "Lagged")}}{
 %%  ~~describe this method here~~
 }
-}}
+\item{\code{signature(object = "FlexibleLagged")}}{{
+%%  ~~describe this method here~~
+}
+}}}
 %\references{
 %%% ~put references to the literature/web site here ~
 %}
@@ -64,6 +68,10 @@ maxLag(la3) # 5
 
 ## extend la3, new entries are filled with NA's
 maxLag(la3) <- 10
+la3
+
+## alternatively, use "[<-" which accepts any replacement values
+la3[11:13] <- 0
 la3
 }
 \keyword{methods}

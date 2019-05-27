@@ -1,3 +1,36 @@
+# lagged 0.3-0 (CRAN)
+
+* update the vignette.
+
+# lagged 0.2-2
+
+* added the missing `show()` method for `Lagged2d` objects.
+
+* added `[[` method for `slMatrix` objects.
+
+* new `as()` method to convert `matrix` to `slMatrix`.
+
+* the initialisation method for `FlexibleLagged` now matches argument `data`
+  only if it is named, i.e. when explicitly supplied. This puts it in line with
+  the default initialisation methods and, in particular, makes it easier to
+  initialise subclasses of `FlexibleLagged`.
+
+- set a prototype, `new("Lagged1d")`, for the data slot of `FlexibleLagged`. The
+  default prototype was giving invalid objects in some cases,
+  e.g. `new("FlexibleLagged")`.
+
+- added `"maxLag<-"` method for `FlexibleLagged` objects.
+
+- the "[[" and "[" methods for `FlexibleLagged` were not completely in line with
+  the other Lagged classes (and the documentation) for index of length one.
+
+- for "Lagged2d" objects indexing with two indices is now defined and works
+  naturally in a matrix-like way: the first index, `i`, takes values in `1:d`,
+  where `d` is the number of seasons and the second index, `j`, in
+  `0:maxlag`. As for matrices, an empty index designates the whole range in the
+  corresponding extent.
+
+
 # lagged 0.2-1
 
 * Bug-fix:  `nSeasons()` and `nSeasons<-()`are now exported.

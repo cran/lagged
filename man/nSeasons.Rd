@@ -3,6 +3,7 @@
 \alias{nSeasons}
 \alias{nSeasons<-}
 \alias{nSeasons-methods}
+\alias{nSeasons,slMatrix-method}
 \title{Number of seasons}
 \description{Number of seasons.}
 \usage{
@@ -27,17 +28,15 @@ nSeasons(object, ...) <- value
 \author{Georgi N. Boshnakov}
 \section{Methods}{
 \describe{
-
-\item{\code{signature(object = "SarimaFilter")}}{{
-%%  ~~describe this method here~~
+  \item{\code{signature(object = "slMatrix")}}{{
+      %%  ~~describe this method here~~
+    }}
+  }
 }
-}\item{\code{signature(object = "VirtualArmaFilter")}}{{
-%%  ~~describe this method here~~
+\examples{
+m <- slMatrix(matrix(1:12, nrow = 4))
+m
+nSeasons(m)
 }
-}}}
-%\examples{
-%ap <- pcts(AirPassengers)
-%nSeasons(ap)
-%}
 \keyword{methods}
 \keyword{ts}

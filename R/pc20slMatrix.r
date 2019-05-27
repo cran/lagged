@@ -430,3 +430,14 @@ as.matrix.slMatrix <- function(x, ...){
 # no need of the S4 method since as() calls as.matrix
 # setAs("slMatrix", "matrix", as.matrix.slMatrix)
 
+
+
+## 2019-05-11 new
+## for consistency with "Lagged2d"
+setMethod("[[", signature(x = "slMatrix", i = "numeric"),
+          function(x, i){
+              x@m[ , i + 1] # i is lag
+          })
+
+## 2019-05-14 new
+setAs("matrix", "slMatrix", function(from) new("slMatrix", m = from))

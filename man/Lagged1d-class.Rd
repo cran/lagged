@@ -8,12 +8,16 @@
 \title{Class Lagged1d}
 \description{Class Lagged1d.}
 \section{Objects from the Class}{
-Objects can be created by calls of the form \code{new("Lagged1d", ...)}.
+  
+  Objects can be created by calls of the form \code{Lagged(v)} or
+  \code{new("Lagged1d", data = v)}, where \code{v} is a vector.
+  \code{new("Lagged1d", ...)} also works.
+  
 %%  ~~ describe objects here ~~
 }
 \section{Slots}{
   \describe{
-    \item{\code{data}:}{Object of class \code{"vector"} ~~ }
+    \item{\code{data}:}{Object of class \code{"vector"}.}
   }
 }
 \section{Extends}{
@@ -21,9 +25,10 @@ Class \code{"\linkS4class{Lagged}"}, directly.
 }
 \section{Methods}{
   \describe{
-    \item{[}{\code{signature(x = "Lagged1d", i = "numeric")}: ... }
     \item{[<-}{\code{signature(x = "Lagged1d", i = "numeric")}: ... }
-	 }
+    \item{[}{\code{signature(x = "Lagged1d", i = "numeric", j = "ANY", drop = "ANY")}: ... }
+    \item{show}{\code{signature(object = "Lagged1d")}: ... }
+    \item{whichLagged}{\code{signature(x = "Lagged1d", y = "missing")}: ... }}
 }
 %\references{
 %%%  ~~put references to the literature/web site here~~

@@ -1,4 +1,4 @@
-% Created 2018-10-05 Fri 23:26
+% Created 2019-05-27 Mon 08:21
 % Intended LaTeX compiler: pdflatex
 \documentclass[a4paper,twoside,11pt,nojss,article]{jss}
 	       \usepackage[T1]{fontenc}
@@ -21,8 +21,11 @@ library("lagged")
 pd <- packageDescription("lagged")
 @
 \Abstract{
-Package \pkg{lagged} provides classes and methods for objects,
-whose indexing naturally starts from zero.
+Package \pkg{lagged} provides classes and methods for objects, whose indexing
+naturally starts from zero. Subsetting, indexing and mathematical operations are
+defined naturally between lagged objects and lagged and base R
+objects. Recycling is not used, except for singletons. The single bracket
+operator doesn't drop dimensions by default.
 \par
 This vignette is part of package \pkg{lagged}, version~\Sexpr{pd$Version}.
 }
@@ -50,7 +53,7 @@ This vignette is part of package \pkg{lagged}, version~\Sexpr{pd$Version}.
 
 
 \section{Univariate lagged objects}
-\label{sec:org3518898}
+\label{sec:orge7d12e4}
 
 Create a univariate lagged object\footnote{The datasets \texttt{ldeaths}, \texttt{fdeaths} and \texttt{mdeaths} are in base R. The examples
 involving them are adapted from the help page of \texttt{acf()}.}:
@@ -72,7 +75,7 @@ length(la1)
 
 
 \section{Indexing}
-\label{sec:org568a95d}
+\label{sec:orgd6302ab}
 
 Indexing drops the "laggedness" to allow easy access to the underlying data\footnote{For some indices, such as \texttt{0:4}, it is possible to keep a Lagged class but it would be
 confusing if the indexing operation was returning Lagged or non-Lagged objects depending on
@@ -100,7 +103,7 @@ all(la1a == la1b)
 
 
 \section{Unary arithmetic and mathematical functions}
-\label{sec:org9e5faa0}
+\label{sec:orgda4f1ac}
 
 Unary arithmetic operations and mathematical functions replace the data part of the object
 and keep its class.
@@ -151,7 +154,7 @@ preserve the class.
 Note however that unary operators and mathematical functions do preserve the class.
 
 \section{Multivariate lagged objects}
-\label{sec:orgbe9bdc2}
+\label{sec:org0d45815}
 
 Compute the autocorrelations of a multivariate time series and convert it to a lagged object.
 <<>>=

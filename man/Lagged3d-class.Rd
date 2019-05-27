@@ -2,12 +2,15 @@
 \Rdversion{1.1}
 \docType{class}
 \alias{Lagged3d-class}
-%\alias{[,Lagged3d,numeric-method}
 
 \title{Class Lagged3d}
 \description{Class Lagged3d.}
 \section{Objects from the Class}{
-Objects can be created by calls of the form \code{new("Lagged3d", ...)}.
+    
+  Objects can be created by calls of the form \code{Lagged(a)} or
+  \code{new("Lagged3d", data = a)}, where \code{a} is a 3-d array.
+  \code{new("Lagged3d", ...)} also works.
+
 %%  ~~ describe objects here ~~
 }
 \section{Slots}{
@@ -20,8 +23,11 @@ Class \code{"\linkS4class{Lagged}"}, directly.
 }
 \section{Methods}{
   \describe{
-    \item{[}{\code{signature(x = "Lagged3d", i = "numeric")}: ... }
-	 }
+    \item{[}{\code{signature(x = "Lagged3d", i = "numeric", j = "missing", drop = "logical")}: ... }
+    \item{[}{\code{signature(x = "Lagged3d", i = "numeric", j = "missing", drop = "missing")}: ... }
+    \item{[<-}{\code{signature(x = "Lagged3d", i = "numeric")}: ... }
+    \item{show}{\code{signature(object = "Lagged3d")}: ... }
+    \item{whichLagged}{\code{signature(x = "Lagged3d", y = "missing")}: ... }}
 }
 %\references{
 %%%  ~~put references to the literature/web site here~~
@@ -39,6 +45,6 @@ Class \code{"\linkS4class{Lagged}"}, directly.
 \code{\linkS4class{Lagged2d}}
 }
 \examples{
-showClass("Lagged3d")
+## see examples for class "Lagged"
 }
 \keyword{classes}

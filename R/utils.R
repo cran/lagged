@@ -6,6 +6,23 @@
 }
 
 
+## this is identical to nposargs() in package "gbutils", see there for documentation.
+## the copy here is for historical reasons and any improvements will be in gbutils.
+nposargs <- function(x,a = FALSE){# x is expected to be a call, usually the result of sys.call()
+  wrk <- as.list(x)
+  tot <- length(wrk) - 1
+  nameswrk <- names(wrk)
+  named <- if(!is.null(nameswrk)) length(nameswrk[nameswrk != ""])
+           else                   0
+  res <- tot - named
+
+  # a patch needed for my purposes follows
+  if(named == 0 && res == 2 && a[1])
+    res <- res - 1
+  res
+}
+
+
 ## 2018-08-10 copied from 'pcts',
 ##    leaving these functions in 'pcts' where they are documented;
 ## For now, Not exporting from 'lagged'

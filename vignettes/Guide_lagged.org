@@ -22,8 +22,11 @@
 #+LATEX_HEADER: pd <- packageDescription("lagged")
 #+LATEX_HEADER: @
 #+LATEX_HEADER: \Abstract{
-#+LATEX_HEADER: Package \pkg{lagged} provides classes and methods for objects,
-#+LATEX_HEADER: whose indexing naturally starts from zero. 
+#+LATEX_HEADER: Package \pkg{lagged} provides classes and methods for objects, whose indexing
+#+LATEX_HEADER: naturally starts from zero. Subsetting, indexing and mathematical operations are
+#+LATEX_HEADER: defined naturally between lagged objects and lagged and base R
+#+LATEX_HEADER: objects. Recycling is not used, except for singletons. The single bracket
+#+LATEX_HEADER: operator doesn't drop dimensions by default.
 #+LATEX_HEADER: \par
 #+LATEX_HEADER: This vignette is part of package \pkg{lagged}, version~\Sexpr{pd$Version}.
 #+LATEX_HEADER: }
@@ -43,6 +46,8 @@
 library("lagged")
 pd <- packageDescription("lagged")
 #+END_SRC
+
+
 
 
 * Univariate lagged objects

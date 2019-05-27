@@ -12,7 +12,7 @@ test_that("the conversions between `season-lag' and acf from `base' are ok",
     ## ltsa::tacvfARMA(phi = 0.8, sigmasq = 1, maxLag = 5)
     ## (acf(lh))
 
-    ## pc_acf for  2 seasons in `sl' rrangement
+    ## pc_acf for  2 seasons in `sl' arrangement
     ##    using character values for easier reading
     matsl <- rbind(paste0("Ra",0:9), paste0("Rb",0:9))
     matsl
@@ -25,7 +25,7 @@ test_that("the conversions between `season-lag' and acf from `base' are ok",
     expect_identical(acfbase2sl(sl2acfbase(matsl)), matsl)
     expect_false(identical(acfbase2sl(sl2acfbase(matsl, fullblocks = TRUE)), matsl[ , 1:8]))
 
-    ## compute an acf (the example is from ?acf) and replce the values with character for easy
+    ## compute an acf (the example is from ?acf) and replace the values with character for easy
     ## reading
     mdf <- acf(ts.union(mdeaths, fdeaths), lag.max = 9)
         pacf(ts.union(mdeaths, fdeaths), lag.max = 9)
