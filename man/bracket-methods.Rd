@@ -15,6 +15,14 @@
 \alias{[,Lagged2d,missing,numeric,missing-method}
 \alias{[,Lagged2d,numeric,numeric,missing-method}
 \alias{[,FlexibleLagged,missing,missing,ANY-method}
+\alias{[,ANY,ANY,ANY,ANY-method}
+\alias{[,nonStructure,ANY,ANY,ANY-method}
+\alias{[,Lagged2d,character,missing,logical-method}
+\alias{[,Lagged2d,character,missing,missing-method}
+\alias{[,Lagged2d,character,character,missing-method}
+\alias{[,Lagged2d,missing,character,missing-method}
+\alias{[,Lagged2d,numeric,character,missing-method}
+\alias{[,Lagged2d,character,numeric,missing-method}
 
 \title{Methods for subsetting defined in package 'lagged'}
 \description{Methods for subsetting  defined in package 'lagged'.}
@@ -91,6 +99,36 @@
 }
 }\item{\code{signature(x = "FlexibleLagged", i = "missing", j = "missing", 
           drop = "ANY")}}{{
+%%  ~~describe this method here~~
+}
+}\item{\code{signature(x = "ANY", i = "ANY", j = "ANY", drop = "ANY")}}{{
+%%  ~~describe this method here~~
+}
+}\item{\code{signature(x = "nonStructure", i = "ANY", j = "ANY", drop = "ANY")}}{{
+%%  ~~describe this method here~~
+}
+}\item{\code{signature(x = "Lagged2d", i = "character", j = "missing", 
+          drop = "logical")}}{{
+%%  ~~describe this method here~~
+}
+}\item{\code{signature(x = "Lagged2d", i = "character", j = "missing", 
+          drop = "missing")}}{{
+%%  ~~describe this method here~~
+}
+}\item{\code{signature(x = "Lagged2d", i = "character", j = "character", 
+          drop = "missing")}}{{
+%%  ~~describe this method here~~
+}
+}\item{\code{signature(x = "Lagged2d", i = "missing", j = "character", 
+          drop = "missing")}}{{
+%%  ~~describe this method here~~
+}
+}\item{\code{signature(x = "Lagged2d", i = "numeric", j = "character", 
+          drop = "missing")}}{{
+%%  ~~describe this method here~~
+}
+}\item{\code{signature(x = "Lagged2d", i = "character", j = "numeric", 
+          drop = "missing")}}{{
 %%  ~~describe this method here~~
 }
 }}

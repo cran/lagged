@@ -196,7 +196,8 @@ function(x, i, j, type = "sl", ... ,value){
 setMethod("fill.slMatrix",
           signature(m = "matrix", f = "function"),
           function(m, f, period, maxlag, type){
-              print("filling with a function!")
+              ## print("filling with a function!")
+              ##
               ## 2016-03-31 was: for(i in 1:period)
               for(i in seq(length = period))
                   for(j in 0:maxlag)

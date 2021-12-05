@@ -8,6 +8,10 @@
 \alias{[[,Lagged2d,numeric,logical-method}
 \alias{[[,Lagged2d,numeric,numeric-method}
 \alias{[[,slMatrix,numeric,ANY-method}
+\alias{[[,Lagged2d,missing,numeric-method}
+\alias{[[,Lagged2d,numeric,missing-method}
+\alias{[[,FlexibleLagged,missing,numeric-method}
+\alias{[[,FlexibleLagged,numeric,missing-method}
 \title{Methods for '[[' in package 'lagged'}
 \description{Methods for '[[' in package 'lagged'.}
 \section{Methods}{
@@ -33,6 +37,18 @@
 %%  ~~describe this method here~~
 }
 }\item{\code{signature(x = "slMatrix", i = "numeric", j = "ANY")}}{{
+%%  ~~describe this method here~~
+}
+}\item{\code{signature(x = "Lagged2d", i = "missing", j = "numeric")}}{{
+%%  ~~describe this method here~~
+}
+}\item{\code{signature(x = "Lagged2d", i = "numeric", j = "missing")}}{{
+%%  ~~describe this method here~~
+}
+}\item{\code{signature(x = "FlexibleLagged", i = "missing", j = "numeric")}}{{
+%%  ~~describe this method here~~
+}
+}\item{\code{signature(x = "FlexibleLagged", i = "numeric", j = "missing")}}{{
 %%  ~~describe this method here~~
 }
 }}}

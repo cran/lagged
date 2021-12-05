@@ -61,14 +61,14 @@ Boshnakov GN and Iqelan BM (2009).
 ``Generation of time series models with given spectral
 properties.''
 \emph{J. Time Series Anal.}, \bold{30}(3), pp. 349--368.
-ISSN 0143-9782, \url{http://dx.doi.org/10.1111/j.1467-9892.2009.00617.x}.
+ISSN 0143-9782, \doi{10.1111/j.1467-9892.2009.00617.x}.
 % end:bibentry:  boshnakov2009gen
 
   % bibentry: boshnakov2012pld
 Boshnakov GN and Lambert-Lacroix S (2012).
 ``A periodic Levinson-Durbin algorithm for entropy maximization.''
 \emph{Computational Statistics \& Data Analysis}, \bold{56}, pp. 15--24.
-ISSN 0167-9473, \url{http://dx.doi.org/10.1016/j.csda.2011.07.001}, \url{http://www.sciencedirect.com/science/article/pii/S0167947311002556}.
+ISSN 0167-9473, \doi{10.1016/j.csda.2011.07.001}, \url{https://www.sciencedirect.com/science/article/pii/S0167947311002556}.
 % end:bibentry:  boshnakov2012pld
 }
 \author{Georgi N. Boshnakov}

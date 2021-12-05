@@ -61,6 +61,16 @@ test_that("slMatrix",
     expect_equal(msl[1, -2, type = "co"], 0)
 
     expect_output(msl[1, -2, type = "co"] <- 5555, "attempt to assign a coefficient value at negative/large index")
-    expect_error(nSeasons(msl) <- 5, "unable to find an inherited method for function 'nSeasons<-'")
+    
+    ## The following command was giving error in package "covr". Resolved by setting
+    ## `options(useFancyQuotes = FALSE)` in `tests/testthat.R`, see
+    ## https://github.com/r-lib/covr/issues/420. Another solution is:
+    ##
+    ## expect_error(nSeasons(msl) <- 5,
+    ##              "unable to find an inherited method for function .*nSeasons<-.*")
+    ##
+    ## but note that each quote is replaced by .* not just . 
+    expect_error(nSeasons(msl) <- 5, "unable to find an inherited method for function .nSeasons<-.")
 
 })
+

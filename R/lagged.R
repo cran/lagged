@@ -126,8 +126,22 @@ setMethod("[[", c(x = "Lagged", i = "numeric", j = "missing"),
           )
 
 setMethod("[[", c(x = "FlexibleLagged", i = "ANY", j = "ANY"),
-          function(x, i, j)
+          function(x, i, j){
               x@data[[i, j]]
+          }
+          )
+setMethod("[[", c(x = "FlexibleLagged", i = "missing", j = "numeric"),
+          function(x, i, j){
+              x@data[[ , j]]
+          }
+          )
+setMethod("[[", c(x = "FlexibleLagged", i = "numeric", j = "missing"),
+          function(x, i, j){
+              if(nposargs(sys.call(-1)) == 2) # x[[i]]
+                  x@data[[i]]
+              else # x[i, ]
+                  x@data[[i, ]]
+          }
           )
 
 setReplaceMethod("[[", c(x = "Lagged", i = "numeric"),
@@ -139,6 +153,25 @@ setReplaceMethod("[[", c(x = "Lagged", i = "numeric"),
                      x
                  })
 
+setMethod("[[", c(x = "Lagged2d", i = "numeric", j = "missing"),
+          function(x, i, j){
+              if(length(i) == 1){
+                  if(nposargs(sys.call(-1)) == 2) # x[i] - note the use of -1 in sys.call()
+                      x@data[ , i + 1, drop = TRUE]
+                  else             # x[i, ]
+                      x@data[i, , drop = TRUE]
+              }else
+                  stop("the length of argument `i' must be equal to one")
+          }
+          )
+setMethod("[[", c(x = "Lagged2d", i = "missing", j = "numeric"),
+          function(x, i, j){
+              if(length(j) == 1){
+                      x@data[ , j + 1, drop = TRUE]
+              }else
+                  stop("the length of argument `j' must be equal to one")
+          }
+          )
 setMethod("[[", c(x = "Lagged2d", i = "numeric", j = "numeric"),
           function(x, i, j){
               if(length(i) == 1)
@@ -321,6 +354,25 @@ setMethod("[", c(x = "Lagged2d", i = "numeric", j = "missing", drop = "logical")
           } 
           )
 
+setMethod("[", c(x = "Lagged2d", i = "character", j = "missing", drop = "missing"),
+          function(x, i, ..., drop = FALSE){
+              if(nargs() == 2)              # x[i]
+                  ## no need (and can't) to add one here
+                  x@data[ , i, drop = FALSE] 
+              else                          # x[i, ]
+                  x@data[i, , drop = FALSE] 
+          }
+          )
+
+setMethod("[", c(x = "Lagged2d", i = "character", j = "missing", drop = "logical"),
+          function(x, i, ..., drop = FALSE){
+              if(nposargs(sys.call()) == 2) # x[i]
+                  x@data[ , i, drop = drop]
+              else                          # x[i, ]
+                  x@data[i, , drop = drop]
+          } 
+          )
+
 setMethod("[", c(x = "Lagged2d", i = "numeric", j = "numeric", drop = "missing"),
           function(x, i, j, ..., drop = FALSE)  
               x@data[i, j + 1, drop = FALSE]
@@ -330,8 +382,25 @@ setMethod("[", c(x = "Lagged2d", i = "missing", j = "numeric", drop = "missing")
               x@data[ , j + 1, drop = FALSE]
           )
 
+setMethod("[", c(x = "Lagged2d", i = "character", j = "numeric", drop = "missing"),
+          function(x, i, j, ..., drop = FALSE)  
+              x@data[i, j+1, drop = FALSE]
+          )
+setMethod("[", c(x = "Lagged2d", i = "character", j = "character", drop = "missing"),
+          function(x, i, j, ..., drop = FALSE)  
+              x@data[i, j, drop = FALSE]
+          )
+setMethod("[", c(x = "Lagged2d", i = "numeric", j = "character", drop = "missing"),
+          function(x, i, j, ..., drop = FALSE)  
+              x@data[i, j, drop = FALSE]
+          )
+setMethod("[", c(x = "Lagged2d", i = "missing", j = "character", drop = "missing"),
+          function(x, i, j, ..., drop = FALSE)  
+              x@data[ , j, drop = FALSE]
+          )
+
 setMethod("[", c(x = "Lagged2d", i = "ANY", j = "ANY", drop = "character"),
-          ## vedry old code, modelled after the method for 'slMatrix'
+          ## very old code, modelled after the method for 'slMatrix'
           function(x, i, j, ..., drop = "sl"){  
               ## for now, don't write about this method in the documentation;
               ## it will certainly change
@@ -571,7 +640,9 @@ acf2Lagged <- function(x){
 }
 
 Lagged <- function(data, ...){
-    if(is.vector(data)){
+    if(inherits(data, "acf")){    # for S3 class "acf"
+        acf2Lagged(data)
+    }else if(is.vector(data)){
         new("Lagged1d", data = data, ...)
     }else if(is.matrix(data)){
         new("Lagged2d", data = data, ...)
@@ -579,8 +650,8 @@ Lagged <- function(data, ...){
         new("Lagged3d", data = data, ...)
     }else if(is(data, "Lagged")){
         new("FlexibleLagged", data = data, ...)
-    }else if(inherits(data, "acf")){    # for S3 class "acf"
-        acf2Lagged(data)
+    ## }else if(inherits(data, "acf")){    # for S3 class "acf"
+    ##     acf2Lagged(data)
     }else
         stop("I don't know how to create a Lagged object from the given data")
 }
