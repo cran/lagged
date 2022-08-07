@@ -1,3 +1,10 @@
+# lagged 0.3.2 (CRAN)
+
+* Fixed 'LaTeX specials' note from CRAN.
+
+* Minor documentation tweaks.
+
+
 # lagged 0.3-1 (CRAN)
 
 * made sure that `Lagged` checks early if the argument inherits from
@@ -7,7 +14,6 @@
 
 * removed travis settings.
 
-
 * improved handling of `"[["` for `Lagged2d` objects.
 
 * for `Lagged2d` objects, added "[" methods for character `i`.
@@ -15,7 +21,7 @@
 
 # lagged 0.3-0 (CRAN)
 
-* update the vignette.
+* updated the vignette.
 
 
 # lagged 0.2-2

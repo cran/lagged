@@ -4,8 +4,8 @@
 \alias{nSeasons<-}
 \alias{nSeasons-methods}
 \alias{nSeasons,slMatrix-method}
-\title{Number of seasons}
-\description{Number of seasons.}
+\title{Get the number of seasons from an object}
+\description{Get the number of seasons from an object.}
 \usage{
 nSeasons(object)
 nSeasons(object, ...) <- value
@@ -19,17 +19,25 @@ nSeasons(object, ...) <- value
 }
 \details{
 
-  These are generic functions.
+  These are generic functions. 
 
+  Methods for \code{nSeasons} are straightforward when the property
+  makes sense for objects from a class. In contrast, methods for the
+  replacement version, \code{`nSeasons<-`}, should be defined carefully
+  and may not even be feasible. 
 }
 \value{
   an integer number
 }
 \author{Georgi N. Boshnakov}
 \section{Methods}{
-\describe{
-  \item{\code{signature(object = "slMatrix")}}{{
-      %%  ~~describe this method here~~
+
+  No methods for \code{`nSeasons<-`} are defined in package
+  \pkg{lagged}. The methods defined for \code{nSeasons} are given below.
+  
+  \describe{
+    \item{\code{signature(object = "slMatrix")}}{{
+	%%  ~~describe this method here~~
     }}
   }
 }

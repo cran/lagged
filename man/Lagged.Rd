@@ -45,6 +45,30 @@ Lagged(data, ...)
 \code{\linkS4class{Lagged3d}}
 }
 \examples{
+## a discrete distribution with outcomes 0,1,2,3,4,5,6:
+v <- dbinom(0:6, size = 6, p = 0.5)
+bin6 <- Lagged(v)
+
+## names are used, if present:
+names(v) <- paste0("P(x=", 0:6, ")")
+bin6a <- Lagged(v)
+bin6a
+## subsetting drops the laggedness:
+bin6a[1:3]
+bin6a[]
+bin6a[0:2]
+## to resize (shrink or extend) the object use 'maxLag<-':
+s8 <- s2 <- bin6a
+maxLag(s2) <- 2
+s2
+## extending inserts NA's:
+maxLag(s8) <- 8
+s8
+## use assignment to extend with specific values:
+s8a <- bin6a
+s8a[7:8] <- c("P(x=7)" = 0, "P(x=8)" = 0)
+s8a
+
 ## adapted from examples for acf()
 ## acf of univariate ts
 acv1 <- acf(ldeaths, plot = FALSE)

@@ -2,7 +2,7 @@
 \alias{sl2acfbase}
 \alias{acfbase2sl}
 \alias{sl2vecacf}
-\title{Convert between vector and season lag representations}
+\title{Convert between vector and season-lag representations}
 \description{
 
   Convert between vector and season-lag representations of
